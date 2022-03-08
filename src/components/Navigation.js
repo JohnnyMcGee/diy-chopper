@@ -15,8 +15,9 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import SearchIcon from "@mui/icons-material/Search";
 import { Stack } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = ["Home", "Explore", "Answers"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Search = styled("div")(({ theme }) => ({
@@ -30,8 +31,9 @@ const Search = styled("div")(({ theme }) => ({
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
+    margin: "auto",
     width: "auto",
+    maxWidth: "40rem",
   },
 }));
 
@@ -54,7 +56,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
+      width: "100%",
     },
   },
 }));
@@ -136,7 +138,7 @@ const Navigation = () => {
             >
               DIY Chopper
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }}}>
               {pages.map((page) => (
                 <Button
                   key={page}
@@ -147,7 +149,7 @@ const Navigation = () => {
                 </Button>
               ))}
             </Box>
-            <Box sx={{ flexGrow: 0 }}>
+            <Box sx={{ flexGrow: 0}}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -184,16 +186,15 @@ const Navigation = () => {
               wrap: "wrap",
             }}
           >
-            <Box sx={{ flexGrow: 2 }}>
-              <Search
-                sx={{ maxWidth: "40rem", width: "80%", marginLeft: "10%" }}
-              >
+            <Box sx={{ flexGrow: 3 }}>
+              <Search>
                 <SearchIconWrapper>
                   <SearchIcon />
                 </SearchIconWrapper>
                 <StyledInputBase
                   placeholder="Search…"
                   inputProps={{ "aria-label": "search" }}
+                  fullWidth={true}
                 />
               </Search>
             </Box>
@@ -204,7 +205,13 @@ const Navigation = () => {
                 justifyContent: "center",
               }}
             >
-              <Button variant="contained">New Project</Button>
+              <Button
+                variant="contained"
+                endIcon={<AddIcon />}
+                color="secondary"
+              >
+                New Project
+              </Button>
             </Box>
           </Toolbar>
         </Stack>
