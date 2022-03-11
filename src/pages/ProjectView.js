@@ -14,7 +14,7 @@ import {
 const ProjectView = () => {
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h6" gutterBottom sx={{pt: 1, pl: 1}}>
         Project Title Goes Here
       </Typography>
       <Box sx={{ height: "240px", backgroundColor: "gray" }}></Box>
@@ -57,10 +57,9 @@ const ProjectView = () => {
           <Grid item xs={12} align="center">
             <Button variant="contained">Save Inspiration</Button>
           </Grid>
-          secondary
         </Grid>
       </Paper>
-      <Stack></Stack>
+      <Stack sx={{height: "1000px"}}></Stack>
     </Box>
   );
 };
