@@ -11,6 +11,7 @@ import {
   Stack,
   IconButton,
   Divider,
+  Toolbar,
 } from "@mui/material";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
@@ -26,6 +27,7 @@ import "./hideScrollbar.css";
 import "./hoverArrows.css";
 
 import { format } from "date-fns";
+import { alpha } from "@mui/material/styles";
 
 const arrow = {
   position: "absolute",
@@ -110,7 +112,7 @@ const photos = [
   },
 ];
 
-const title = "Project Title Goes Here";
+const title = "Project Title";
 const accountName = "Account Name";
 const accountStatus = "account status";
 const startDate = new Date();
@@ -128,9 +130,20 @@ sunt in culpa qui officia deserunt mollit anim id est laborum.`;
 const ProjectView = ({ profilePicture }) => {
   return (
     <Box>
-      <Typography variant="h4" gutterBottom sx={{ pt: 1, pl: 1 }}>
-        {title}
-      </Typography>
+      <Paper
+        elevation={2}
+        sx={{
+          py: 1,
+          pl: 1,
+          width: "100%",
+          position: "sticky",
+          top: 0,
+          zIndex: 11,
+          opacity: 0.87,
+        }}
+      >
+        <Typography variant="h5" sx={{opacity:1}}>{title}</Typography>
+      </Paper>
       <Box sx={{ m: "0 auto", ":hover LeftArrow RightArrow": { opacity: 0 } }}>
         <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
           {photos.map((photo, id) => (
@@ -147,7 +160,7 @@ const ProjectView = ({ profilePicture }) => {
           ))}
         </ScrollMenu>
       </Box>
-      <Paper elevation={3}>
+      <Paper>
         <Grid container spacing={2} sx={{ px: 3, py: 1 }}>
           <Grid item xs={12} md={6}>
             <Card elevation={0}>
@@ -203,8 +216,13 @@ const ProjectView = ({ profilePicture }) => {
           <Grid item xs={12}>
             <Divider></Divider>
           </Grid>
+          <Grid item xs>
+            <Typography variant="h6">
+              Project Details:
+            </Typography>
+          </Grid>
           <Grid item xs={12}>
-            <Typography variant="body1">{details}</Typography>
+            <Typography variant="body1" align="justify">{details}</Typography>
           </Grid>
           <Grid item xs={12} align="center">
             <Button
