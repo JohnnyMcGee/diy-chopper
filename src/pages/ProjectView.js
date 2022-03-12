@@ -17,8 +17,7 @@ import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 // Hides scrollbar on ScrollMenu
 import "./hideScrollbar.css";
-
-import styled from "@emotion/styled";
+import "./hoverArrows.css";
 
 const placeholder = (w, h, text) =>
   `https://via.placeholder.com/${w}x${h}?text=${text.split().join("+")}`;
@@ -46,22 +45,21 @@ const projectPhotos = [
   },
 ];
 
-// style="
-//     /* left: 20px; */
-//     z-index: 10;
-//     background-color: rgba(0,0,0,0.5);
-//     position: absolute;
-//     height: 40vh;
-//     border-radius: 0;
-//     width:  min-content;
-// "
-
-// background-color: rgba(0,0,0,0.5);
-// position: absolute;
-// z-index: 1;
-// height: 40vh;
-// border-radius: 0 50% 50% 0;
-// padding-left: 0;
+const arrow = {
+  position: "absolute",
+  height: "40vh",
+  zIndex: 1,
+  width: "min-content",
+  background:
+    "radial-gradient(circle, rgba(255,255,255,0.25) 0%, rgba(0,0,0,0.01) 100%)",
+  ":hover": {
+    background:
+      "radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0.01) 100%)",
+  },
+  ":disabled": {
+    opacity: 0,
+  },
+};
 
 function LeftArrow() {
   const { isFirstItemVisible, scrollPrev } =
@@ -71,14 +69,8 @@ function LeftArrow() {
     <IconButton
       disabled={isFirstItemVisible}
       onClick={() => scrollPrev()}
-      sx={{
-        backgroundColor: "rgba(0,0,0,0.5)",
-        position: "absolute",
-        zIndex: 1,
-        height: "40vh",
-        borderRadius: "0 50% 50% 0",
-        width: "min-content",
-      }}
+      sx={arrow}
+      className="arrowBtn"
     >
       <ArrowBackIosRoundedIcon />
     </IconButton>
@@ -88,7 +80,15 @@ function LeftArrow() {
 function RightArrow() {
   const { isLastItemVisible, scrollNext } = React.useContext(VisibilityContext);
   return (
-    <IconButton disabled={isLastItemVisible} onClick={() => scrollNext()}>
+    <IconButton
+      disabled={isLastItemVisible}
+      onClick={() => scrollNext()}
+      sx={{
+        ...arrow,
+        right: 0,
+      }}
+      className="arrowBtn"
+    >
       <ArrowForwardIosRoundedIcon />
     </IconButton>
   );
@@ -100,22 +100,20 @@ const ProjectView = () => {
       <Typography variant="h4" gutterBottom sx={{ pt: 1, pl: 1 }}>
         Project Title Goes Here
       </Typography>
-      <Box sx={{ m: "0 auto" }}>
-        <div>
-          <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
-            {projectPhotos.map((photo, id) => (
-              <img
-                itemId={`${id}`}
-                src={photo.src}
-                alt={photo.alt}
-                style={{
-                  height: "40vh",
-                  marginRight: "1px",
-                }}
-              />
-            ))}
-          </ScrollMenu>
-        </div>
+      <Box sx={{ m: "0 auto", ":hover LeftArrow RightArrow": { opacity: 0 } }}>
+        <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
+          {projectPhotos.map((photo, id) => (
+            <img
+              itemId={`${id}`}
+              src={photo.src}
+              alt={photo.alt}
+              style={{
+                height: "40vh",
+                marginRight: "1px",
+              }}
+            />
+          ))}
+        </ScrollMenu>
       </Box>
       <Paper elevation={3}>
         <Grid container spacing={2} sx={{ px: 3, py: 1 }}>

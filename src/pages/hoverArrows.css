@@ -1,0 +1,12 @@
+
+.arrowBtn {
+    opacity:0;
+}
+
+.react-horizontal-scrolling-menu--wrapper:hover .arrowBtn{
+    opacity:1;
+}
+
+.react-horizontal-scrolling-menu--wrapper:hover .arrowBtn:disabled{
+    opacity:0;
+}
