@@ -27,16 +27,17 @@ import "./hideScrollbar.css";
 import "./hoverArrows.css";
 
 import { format } from "date-fns";
-import { alpha } from "@mui/material/styles";
 
 const arrow = {
   position: "absolute",
   height: "40vh",
   zIndex: 1,
   width: "min-content",
+  transition: (theme) => theme.transitions.create(['background', 'opacity', 'padding'], {duration: theme.transitions.duration.standard,}),
   background:
     "radial-gradient(circle, rgba(255,255,255,0.25) 0%, rgba(0,0,0,0.01) 100%)",
   ":hover": {
+    p: 2,
     background:
       "radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0.01) 100%)",
   },
@@ -142,7 +143,9 @@ const ProjectView = ({ profilePicture }) => {
           opacity: 0.87,
         }}
       >
-        <Typography variant="h5" sx={{opacity:1}}>{title}</Typography>
+        <Typography variant="h5" sx={{ opacity: 1 }}>
+          {title}
+        </Typography>
       </Paper>
       <Box sx={{ m: "0 auto", ":hover LeftArrow RightArrow": { opacity: 0 } }}>
         <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
@@ -217,12 +220,12 @@ const ProjectView = ({ profilePicture }) => {
             <Divider></Divider>
           </Grid>
           <Grid item xs>
-            <Typography variant="h6">
-              Project Details:
-            </Typography>
+            <Typography variant="h6">Project Details:</Typography>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="body1" align="justify">{details}</Typography>
+            <Typography variant="body1" align="justify">
+              {details}
+            </Typography>
           </Grid>
           <Grid item xs={12} align="center">
             <Button
