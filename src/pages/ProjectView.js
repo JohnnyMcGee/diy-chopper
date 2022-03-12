@@ -46,12 +46,40 @@ const projectPhotos = [
   },
 ];
 
+// style="
+//     /* left: 20px; */
+//     z-index: 10;
+//     background-color: rgba(0,0,0,0.5);
+//     position: absolute;
+//     height: 40vh;
+//     border-radius: 0;
+//     width:  min-content;
+// "
+
+// background-color: rgba(0,0,0,0.5);
+// position: absolute;
+// z-index: 1;
+// height: 40vh;
+// border-radius: 0 50% 50% 0;
+// padding-left: 0;
+
 function LeftArrow() {
   const { isFirstItemVisible, scrollPrev } =
     React.useContext(VisibilityContext);
 
   return (
-    <IconButton disabled={isFirstItemVisible} onClick={() => scrollPrev()}>
+    <IconButton
+      disabled={isFirstItemVisible}
+      onClick={() => scrollPrev()}
+      sx={{
+        backgroundColor: "rgba(0,0,0,0.5)",
+        position: "absolute",
+        zIndex: 1,
+        height: "40vh",
+        borderRadius: "0 50% 50% 0",
+        width: "min-content",
+      }}
+    >
       <ArrowBackIosRoundedIcon />
     </IconButton>
   );
