@@ -2,6 +2,6 @@
     margin: 0;
 }
 
-.photoScroller {
-    height: 33vh;
+html {
+    overflow-x:hidden;
 }
