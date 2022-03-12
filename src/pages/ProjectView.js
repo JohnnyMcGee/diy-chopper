@@ -17,6 +17,7 @@ import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 // Hides scrollbar on ScrollMenu
 import "./hideScrollbar.css";
+// Hides scroll arrow buttons unless mouse hovers on scrollmenu
 import "./hoverArrows.css";
 
 const placeholder = (w, h, text) =>
@@ -94,6 +95,12 @@ function RightArrow() {
   );
 }
 
+// Wrapper to receive itemId prop, since native tags (like img) will throw an error
+// String itemId required for scrollMenu controller to function properly
+const ScrollMenuItem = ({children}) => {
+  return <div>{children}</div>;
+};
+
 const ProjectView = () => {
   return (
     <Box>
@@ -103,15 +110,16 @@ const ProjectView = () => {
       <Box sx={{ m: "0 auto", ":hover LeftArrow RightArrow": { opacity: 0 } }}>
         <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
           {projectPhotos.map((photo, id) => (
-            <img
-              itemId={`${id}`}
-              src={photo.src}
-              alt={photo.alt}
-              style={{
-                height: "40vh",
-                marginRight: "1px",
-              }}
-            />
+            <ScrollMenuItem key={id} itemId={`${id}`}>
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                style={{
+                  height: "40vh",
+                  marginRight: "1px",
+                }}
+              />
+            </ScrollMenuItem>
           ))}
         </ScrollMenu>
       </Box>
