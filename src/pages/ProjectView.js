@@ -9,10 +9,10 @@ import {
   Card,
   CardHeader,
   Stack,
-  ImageList,
-  Divider,
-  Container,
+  IconButton,
 } from "@mui/material";
+import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 // Hides scrollbar on ScrollMenu
@@ -41,20 +41,30 @@ const projectPhotos = [
     alt: "placeholder",
   },
   {
-    src: placeholder(270, 480, "270x480"),
+    src: placeholder(360, 540, "360x540"),
     alt: "placeholder",
   },
 ];
 
-const ScrollPhoto = styled("img")(
-  ({ theme }) => `
-height: 40vh;
-margin-right: 1px;
-&:last-child {
-  margin-right: 48px;
+function LeftArrow() {
+  const { isFirstItemVisible, scrollPrev } =
+    React.useContext(VisibilityContext);
+
+  return (
+    <IconButton disabled={isFirstItemVisible} onClick={() => scrollPrev()}>
+      <ArrowBackIosRoundedIcon />
+    </IconButton>
+  );
 }
-`
-);
+
+function RightArrow() {
+  const { isLastItemVisible, scrollNext } = React.useContext(VisibilityContext);
+  return (
+    <IconButton disabled={isLastItemVisible} onClick={() => scrollNext()}>
+      <ArrowForwardIosRoundedIcon />
+    </IconButton>
+  );
+}
 
 const ProjectView = () => {
   return (
@@ -63,16 +73,21 @@ const ProjectView = () => {
         Project Title Goes Here
       </Typography>
       <Box sx={{ m: "0 auto" }}>
-        <ScrollMenu
-          className="photoScroller"
-          style={{ justifyContent: "center" }}
-        >
-          <Box sx={{ width: "max-content" }}>
-            {projectPhotos.map((photo) => (
-              <ScrollPhoto src={photo.src} alt={photo.alt} />
+        <div>
+          <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
+            {projectPhotos.map((photo, id) => (
+              <img
+                itemId={`${id}`}
+                src={photo.src}
+                alt={photo.alt}
+                style={{
+                  height: "40vh",
+                  marginRight: "1px",
+                }}
+              />
             ))}
-          </Box>
-        </ScrollMenu>
+          </ScrollMenu>
+        </div>
       </Box>
       <Paper elevation={3}>
         <Grid container spacing={2} sx={{ px: 3, py: 1 }}>
