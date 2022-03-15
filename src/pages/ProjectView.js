@@ -17,6 +17,7 @@ import CalendarTodayTwoToneIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import EventAvailableTwoToneIcon from "@mui/icons-material/EventAvailableTwoTone";
 import HandymanTwoToneIcon from "@mui/icons-material/HandymanTwoTone";
 import EmojiObjectsTwoToneIcon from "@mui/icons-material/EmojiObjectsTwoTone";
+import LightbulbTwoToneIcon from "@mui/icons-material/LightbulbTwoTone";
 
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 // Hides scrollbar on ScrollMenu
@@ -92,8 +93,7 @@ const LeftScrollArrow = () => {
 };
 
 const RightScrollArrow = () => {
-  const { isLastItemVisible, scrollNext } =
-    React.useContext(VisibilityContext);
+  const { isLastItemVisible, scrollNext } = React.useContext(VisibilityContext);
 
   return (
     <RightArrow
@@ -205,20 +205,28 @@ const ProjectView = ({ profilePicture }) => {
           </Grid>
           <Grid item xs={12} align="center">
             <Button
-              variant="contained"
+              variant="outlined"
+              // color="secondaxry"
               sx={{
                 borderRadius: "3em",
-                p: 1.5,
+                border: "2px solid",
+                py: 2.5,
+                px: 3.5,
                 m: 3,
+                ".light": {fontSize: "2em"},
+                ":hover": { border: "2px solid", py: 2, px: 3},
+                ":hover .light": { fontSize: "2.5em"}
               }}
-              startIcon={<EmojiObjectsTwoToneIcon />}
+              startIcon={<EmojiObjectsTwoToneIcon className="light" sx={{ color: "yellow", }}/>}
+
+              // startIcon={<EmojiObjectsTwoToneIcon sx={{ color: "yellow" }} />}
             >
               Save Inspiration
             </Button>
           </Grid>
         </Grid>
       </Paper>
-      <Stack sx={{ height: "1000px", backgroundColor: "#f5f5f5" }}>
+      <Stack sx={{ height: "1000px", backgroundColor: "#eeeeee" }}>
         <Post></Post>
       </Stack>
     </Box>

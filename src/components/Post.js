@@ -1,11 +1,11 @@
-import * as React from "react";
+import React, { useState } from "react";
 import {
   Paper,
   Grid,
   Typography,
-  Toolbar,
   IconButton,
   Box,
+  SvgIcon,
 } from "@mui/material";
 import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone";
 import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
@@ -35,6 +35,8 @@ const subtitle = "Post Subtitle";
 const details = "Post Details";
 
 export default function Post() {
+  const [favorite, setFavorite] = useState(false);
+
   return (
     <Paper elevation={3} sx={{ m: 1, borderRadius: 8, overflow: "hidden" }}>
       <Grid container>
@@ -44,7 +46,7 @@ export default function Post() {
             sx={{
               py: 3,
               px: 3,
-              backgroundColor: "primary.dark",
+              backgroundColor: "primary.main",
               color: "primary.contrastText",
               fontWeight: "bold",
             }}
@@ -53,7 +55,6 @@ export default function Post() {
           </Typography>
         </Grid>
         <Grid item align="center" xs={12} md={8}>
-        
           <img
             src={media[0].src}
             alt={media[0].alt}
@@ -63,10 +64,26 @@ export default function Post() {
           />
         </Grid>
         <Grid item xs={12} md={4}>
-          <Paper sx={{ display: "flex", justifyContent: "space-around", py:2}}>
-            <IconButton onClick={() => console.log("like post")}>
-              <FavoriteBorderTwoToneIcon />
-            </IconButton>
+          <Paper
+            sx={{ display: "flex", justifyContent: "space-around", py: 2 }}
+          >
+            <Grid container sx={{ width: "max-content" }}>
+              <IconButton onClick={() => setFavorite(!favorite)}>
+                {favorite ? (
+                  <FavoriteTwoToneIcon
+                    fontSize="medium"
+                    sx={{ color: "magenta" }}
+                  />
+                ) : (
+                  <FavoriteBorderTwoToneIcon />
+                )}
+              </IconButton>
+              {favorite ? (
+                <Typography variant="body2" sx={{ m: "auto 0" }}>
+                  1
+                </Typography>
+              ) : null}
+            </Grid>
             <IconButton onClick={() => console.log("comment on post")}>
               <ModeCommentTwoToneIcon />
             </IconButton>
