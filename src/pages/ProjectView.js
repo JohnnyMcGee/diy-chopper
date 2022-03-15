@@ -123,8 +123,8 @@ const ProjectView = ({ profilePicture }) => {
           {title}
         </Typography>
       </Paper>
-      <Box sx={{ m: "0 auto", ":hover LeftArrow RightArrow": { opacity: 0 } }}>
-        <ScrollMenu LeftArrow={LeftScrollArrow} RightArrow={RightScrollArrow}>
+      <Box className="hoverArrows" sx={{ position:"relative", m: "0 auto", ":hover LeftArrow RightArrow": { opacity: 0 } }}>
+        <ScrollMenu  LeftArrow={LeftScrollArrow} RightArrow={RightScrollArrow}>
           {photos.map((photo, id) => (
             <ScrollMenuItem key={id} itemId={`${id}`}>
               <img

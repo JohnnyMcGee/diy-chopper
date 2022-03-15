@@ -1,12 +1,12 @@
 
-.arrowBtn {
+.arrow {
     opacity:0;
 }
 
-.react-horizontal-scrolling-menu--wrapper:hover .arrowBtn{
+.hoverArrows:hover .arrow{
     opacity:1;
 }
 
-.react-horizontal-scrolling-menu--wrapper:hover .arrowBtn:disabled{
+.hoverArrows:hover .arrow:disabled{
     opacity:0;
 }

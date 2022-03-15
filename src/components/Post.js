@@ -12,6 +12,8 @@ import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
 import ModeCommentTwoToneIcon from "@mui/icons-material/ModeCommentTwoTone";
 import ShareTwoToneIcon from "@mui/icons-material/ShareTwoTone";
 
+import {LeftArrow, RightArrow} from "./Arrows.js";
+
 const placeholder = (w, h, text) =>
   `https://via.placeholder.com/${w}x${h}?text=${text.split().join("+")}`;
 
@@ -36,6 +38,7 @@ const details = "Post Details";
 
 export default function Post() {
   const [favorite, setFavorite] = useState(false);
+  const [mediaIndex, setMediaIndex] = useState(0);
 
   return (
     <Paper elevation={3} sx={{ m: 1, borderRadius: 8, overflow: "hidden" }}>
@@ -54,7 +57,8 @@ export default function Post() {
             {title}
           </Typography>
         </Grid>
-        <Grid item align="center" xs={12} md={8}>
+        <Grid item className="hoverArrows" align="center" xs={12} md={8} sx={{position:"relative"}}>
+        <LeftArrow className="arrow"/>
           <img
             src={media[0].src}
             alt={media[0].alt}
@@ -62,6 +66,7 @@ export default function Post() {
             width="100%"
             style={{ objectFit: "contain" }}
           />
+          <RightArrow className="arrow"/>
         </Grid>
         <Grid item xs={12} md={4}>
           <Paper

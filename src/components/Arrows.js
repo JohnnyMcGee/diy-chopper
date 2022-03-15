@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 
 const arrow = {
   position: "absolute",
-  height: "40vh",
+  height: "100%",
   zIndex: 1,
   width: "min-content",
   transition: (theme) =>
@@ -27,7 +27,12 @@ const arrow = {
 
 export function LeftArrow({ disabled, onClick, sx }) {
   return (
-    <IconButton disabled={disabled} onClick={onClick} sx={{ ...arrow, ...sx }}>
+    <IconButton
+      className="arrow"
+      disabled={disabled}
+      onClick={onClick}
+      sx={{ ...arrow, ...sx }}
+    >
       <ArrowBackIosRoundedIcon />
     </IconButton>
   );
@@ -36,6 +41,7 @@ export function LeftArrow({ disabled, onClick, sx }) {
 export function RightArrow({ disabled, onClick, sx }) {
   return (
     <IconButton
+      className="arrow"
       disabled={disabled}
       onClick={onClick}
       sx={{
