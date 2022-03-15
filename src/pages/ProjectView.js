@@ -13,8 +13,6 @@ import {
   Divider,
   Toolbar,
 } from "@mui/material";
-import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import CalendarTodayTwoToneIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import EventAvailableTwoToneIcon from "@mui/icons-material/EventAvailableTwoTone";
 import HandymanTwoToneIcon from "@mui/icons-material/HandymanTwoTone";
@@ -28,56 +26,8 @@ import "./hoverArrows.css";
 
 import { format } from "date-fns";
 
-const arrow = {
-  position: "absolute",
-  height: "40vh",
-  zIndex: 1,
-  width: "min-content",
-  transition: (theme) => theme.transitions.create(['background', 'opacity', 'padding'], {duration: theme.transitions.duration.standard,}),
-  background:
-    "radial-gradient(circle, rgba(255,255,255,0.25) 0%, rgba(0,0,0,0.01) 100%)",
-  ":hover": {
-    p: 2,
-    background:
-      "radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0.01) 100%)",
-  },
-  ":disabled": {
-    opacity: 0,
-  },
-};
-
-function LeftArrow() {
-  const { isFirstItemVisible, scrollPrev } =
-    React.useContext(VisibilityContext);
-
-  return (
-    <IconButton
-      disabled={isFirstItemVisible}
-      onClick={() => scrollPrev()}
-      sx={arrow}
-      className="arrowBtn"
-    >
-      <ArrowBackIosRoundedIcon />
-    </IconButton>
-  );
-}
-
-function RightArrow() {
-  const { isLastItemVisible, scrollNext } = React.useContext(VisibilityContext);
-  return (
-    <IconButton
-      disabled={isLastItemVisible}
-      onClick={() => scrollNext()}
-      sx={{
-        ...arrow,
-        right: 0,
-      }}
-      className="arrowBtn"
-    >
-      <ArrowForwardIosRoundedIcon />
-    </IconButton>
-  );
-}
+import Post from "../components/Post.js";
+import { LeftArrow, RightArrow } from "../components/Arrows";
 
 // Wrapper to receive itemId prop, since native tags (like img) will throw an error
 // String itemId required for scrollMenu controller to function properly
@@ -128,6 +78,32 @@ sunt in culpa qui officia deserunt mollit anim id est laborum.`;
 
 // DUMMY DATA
 
+const LeftScrollArrow = () => {
+  const { isFirstItemVisible, scrollPrev } =
+    React.useContext(VisibilityContext);
+
+  return (
+    <LeftArrow
+      className="arrowBtn"
+      onClick={() => scrollPrev()}
+      disabled={isFirstItemVisible}
+    />
+  );
+};
+
+const RightScrollArrow = () => {
+  const { isLastItemVisible, scrollNext } =
+    React.useContext(VisibilityContext);
+
+  return (
+    <RightArrow
+      className="arrowBtn"
+      onClick={() => scrollNext()}
+      disabled={isLastItemVisible}
+    />
+  );
+};
+
 const ProjectView = ({ profilePicture }) => {
   return (
     <Box>
@@ -148,7 +124,7 @@ const ProjectView = ({ profilePicture }) => {
         </Typography>
       </Paper>
       <Box sx={{ m: "0 auto", ":hover LeftArrow RightArrow": { opacity: 0 } }}>
-        <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
+        <ScrollMenu LeftArrow={LeftScrollArrow} RightArrow={RightScrollArrow}>
           {photos.map((photo, id) => (
             <ScrollMenuItem key={id} itemId={`${id}`}>
               <img
@@ -242,7 +218,9 @@ const ProjectView = ({ profilePicture }) => {
           </Grid>
         </Grid>
       </Paper>
-      <Stack sx={{ height: "1000px" }}></Stack>
+      <Stack sx={{ height: "1000px", backgroundColor: "#f5f5f5" }}>
+        <Post></Post>
+      </Stack>
     </Box>
   );
 };
